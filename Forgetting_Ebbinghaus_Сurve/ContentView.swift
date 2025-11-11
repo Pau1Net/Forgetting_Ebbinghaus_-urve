@@ -27,8 +27,6 @@ struct ContentView: View {
                     ScrollView {
                         LazyVStack(spacing: 0) {
                             ForEach(viewModel.items) { item in
-                                // --- ИЗМЕНЕНИЕ ЗДЕСЬ ---
-                                // Теперь мы получаем следующую дату из ViewModel и передаем ее.
                                 RecallItemRowView(
                                     item: item,
                                     reminderDates: viewModel.getReminderDates(for: item),
@@ -55,6 +53,25 @@ struct ContentView: View {
                 .padding()
             }
             .navigationTitle("Recall List")
+            // --- ДОБАВЛЕННЫЙ БЛОК КОДА ---
+            .toolbar {
+                ToolbarItemGroup(placement: .primaryAction) {
+                    // Кнопка для вывода списка уведомлений в консоль
+                    Button {
+                        viewModel.logAllPendingNotifications()
+                    } label: {
+                        Label("Show Log", systemImage: "list.bullet.rectangle.portrait")
+                    }
+                    
+                    // Кнопка для удаления всех запланированных уведомлений
+                    Button {
+                        viewModel.cancelAllPendingNotifications()
+                    } label: {
+                        Label("Cancel All", systemImage: "trash.circle.fill")
+                    }
+                }
+            }
+            // --- КОНЕЦ БЛОКА ---
         }
         .onAppear(perform: viewModel.requestNotificationPermission)
     }

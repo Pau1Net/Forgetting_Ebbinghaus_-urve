@@ -32,11 +32,18 @@ class RecallListViewModel: ObservableObject {
         return ForgettingCurve.reminderDates(from: item.createdAt)
     }
     
-    // --- НОВЫЙ МЕТОД ЗДЕСЬ ---
-    // Находит следующую дату напоминания, которая еще не наступила.
     func getNextReminderDate(for item: RecallItem) -> Date? {
         let allDates = ForgettingCurve.reminderDates(from: item.createdAt)
-        // Находим первую дату в массиве, которая больше текущего времени.
         return allDates.first(where: { $0 > Date() })
+    }
+    
+    // --- НОВЫЙ МЕТОД №1 ---
+    func cancelAllPendingNotifications() {
+        notificationManager.cancelAllNotifications()
+    }
+    
+    // --- НОВЫЙ МЕТОД №2 ---
+    func logAllPendingNotifications() {
+        notificationManager.logPendingNotifications()
     }
 }
