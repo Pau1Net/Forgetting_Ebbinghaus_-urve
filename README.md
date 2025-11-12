@@ -1,4 +1,4 @@
-"Forgetting Ebbinghaus Curve" (working title) is an open-source application for creating text-based notes (with plans to support other media types)
+"Forgetting Ebbinghaus Curve" (working title) is an open-source iOS and macOS application for creating text-based notes (with plans to support other media types)
 designed to enhance information retention based on the [Ebbinghaus forgetting curve](https://en.wikipedia.org/wiki/Forgetting_curve).
 The application is currently in early development stages, with core features yet to be implemented.
 It's worth noting that this application will remain completely free and open-source throughout its development lifecycle and ongoing maintenance.
