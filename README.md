@@ -1,3 +1,6 @@
+> [!NOTE]
+> I've created a design demo for the upcoming app! Feel free to check it out. The file is located directly in the repository: [demo/forget_curve_demo.html](demo/forget_curve_demo.html)
+
 "Forgetting Ebbinghaus Curve" (working title) is an open-source __iOS and macOS__ application for creating text-based notes (with plans to support other media types)
 designed to enhance information retention based on the [Ebbinghaus forgetting curve](https://en.wikipedia.org/wiki/Forgetting_curve).
 The application is currently in early development stages, with core features yet to be implemented.
