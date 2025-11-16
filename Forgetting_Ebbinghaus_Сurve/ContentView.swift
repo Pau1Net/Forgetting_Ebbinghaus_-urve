@@ -14,6 +14,11 @@ struct ContentView: View {
     @State private var showingDeleteConfirmation = false
     @State private var itemsToDelete: Set<RecallItem.ID> = []
 
+    // Smart notification timing states
+    @State private var showingNightTimeAlert = false
+    @State private var currentConflict: NotificationConflict?
+    @State private var pendingContent: String = ""
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -125,13 +130,56 @@ struct ContentView: View {
         } message: {
             Text("Are you sure you want to delete \(itemsToDelete.count) \(itemsToDelete.count == 1 ? "item" : "items")? This action cannot be undone.")
         }
+        // Smart notification timing alert
+        .alert("Night Time Detected", isPresented: $showingNightTimeAlert) {
+            Button("Postpone until Morning") {
+                addItemWithPostponement()
+            }
+            Button("Schedule Anyway") {
+                addItemWithoutPostponement()
+            }
+            Button("Cancel", role: .cancel) {
+                clearPendingState()
+            }
+        } message: {
+            if let conflict = currentConflict {
+                Text(conflict.alertMessage)
+            }
+        }
     }
 
     // MARK: - Helper Methods
 
     private func addItem() {
-        viewModel.addItem(content: newItemContent)
+        let content = newItemContent
+
+        // Check for night-time conflicts
+        if let conflict = viewModel.checkForConflicts(content: content) {
+            // Store the conflict and pending content
+            currentConflict = conflict
+            pendingContent = content
+            showingNightTimeAlert = true
+        } else {
+            // No conflicts, add normally
+            viewModel.addItem(content: content, withConflict: nil)
+            newItemContent = ""
+        }
+    }
+
+    private func addItemWithPostponement() {
+        viewModel.addItem(content: pendingContent, withConflict: currentConflict)
+        clearPendingState()
+    }
+
+    private func addItemWithoutPostponement() {
+        viewModel.addItem(content: pendingContent, withConflict: nil)
+        clearPendingState()
+    }
+
+    private func clearPendingState() {
         newItemContent = ""
+        pendingContent = ""
+        currentConflict = nil
     }
 
     /// Confirms deletion for multiple items (shows dialog)
