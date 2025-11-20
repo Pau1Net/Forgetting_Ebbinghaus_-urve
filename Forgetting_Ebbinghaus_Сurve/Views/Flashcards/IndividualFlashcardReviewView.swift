@@ -31,6 +31,8 @@ struct IndividualFlashcardReviewView: View {
                             },
                             useCompactLayout: true
                         )
+                        // Ensure flip state resets properly on review
+                        .id(flashcard.id)
 
                         // Review statistics
                         if flashcard.studyProgress.totalReviews > 0 {

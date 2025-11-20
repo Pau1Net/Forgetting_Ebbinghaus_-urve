@@ -313,17 +313,11 @@ class RecallListViewModel: ObservableObject {
         flashcardItems.remove(atOffsets: offsets)
     }
 
-    /// Returns all flashcards that are due for review (next reminder date has passed)
+    /// Returns all flashcards available for study
+    /// Modern behavior: returns all flashcards regardless of due status
+    /// This allows users to study any cards they want, anytime
     func getDueFlashcards() -> [FlashcardItem] {
-        return flashcardItems.filter { flashcard in
-            let allDates = getFlashcardReminderDates(for: flashcard)
-
-            // Count how many scheduled reviews should have happened by now
-            let dueReviewCount = allDates.filter { $0 <= Date() }.count
-
-            // Flashcard is due if there are more scheduled reviews than completed reviews
-            return dueReviewCount > flashcard.studyProgress.totalReviews
-        }
+        return flashcardItems
     }
 
     /// Gets all scheduled reminder dates for a flashcard (with adaptive multiplier applied)

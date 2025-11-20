@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-/// Dedicated study session interface for reviewing due flashcards
-/// Displays flashcards one at a time with progress tracking
+/// Dedicated study session interface for reviewing flashcards
+/// Displays all available flashcards one at a time with progress tracking
 struct StudySessionView: View {
     @ObservedObject var viewModel: RecallListViewModel
     @Environment(\.dismiss) var dismiss
@@ -71,6 +71,9 @@ struct StudySessionView: View {
                 handleReview(difficulty)
             }
         )
+        // Force SwiftUI to recreate the view when switching cards
+        // This resets the flip state (showingBack) to false for each new card
+        .id(dueFlashcards[currentIndex].id)
     }
 
     // MARK: - Completion View
@@ -132,11 +135,11 @@ struct StudySessionView: View {
                 .foregroundStyle(.secondary)
 
             VStack(spacing: 6) {
-                Text("No Cards Due")
+                Text("No Cards Available")
                     .font(.title2)
                     .fontWeight(.semibold)
 
-                Text("Check back later for more reviews!")
+                Text("Create flashcards to start studying!")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
@@ -163,8 +166,8 @@ struct StudySessionView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
         .accessibilityElement(children: .contain)
-        .accessibilityLabel("No flashcards due for review")
-        .accessibilityHint("Check back later when flashcards are scheduled for review")
+        .accessibilityLabel("No flashcards available")
+        .accessibilityHint("Create flashcards to start studying")
     }
 
     // MARK: - Helper Methods

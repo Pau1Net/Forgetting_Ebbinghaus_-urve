@@ -58,7 +58,7 @@ struct FlashcardListView: View {
         return result
     }
 
-    var dueCount: Int {
+    var studyCardsCount: Int {
         viewModel.getDueFlashcards().count
     }
 
@@ -129,9 +129,9 @@ struct FlashcardListView: View {
                 Button {
                     showingStudySession = true
                 } label: {
-                    Label("Study (\(dueCount))", systemImage: "brain.head.profile")
+                    Label("Study (\(studyCardsCount))", systemImage: "brain.head.profile")
                 }
-                .disabled(dueCount == 0)
+                .disabled(studyCardsCount == 0)
 
                 #if os(macOS)
                 // Delete selected button (macOS)
