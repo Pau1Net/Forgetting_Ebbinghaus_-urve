@@ -50,7 +50,7 @@ Forgetting_Ebbinghaus_Сurve/
 - [x] Initial project setup
 - [x] Basic note creation
 - [x] __"Smart" notifications system__ (Smart notifications that consider input text size, time of day, and various other important parameters)
-- [ ] Flashcard generation
+- [x] Flashcard generation
 - [x] __Adaptive learning algorithm__ (based on input text length, enabling efficient studying for both short snippets and lengthy documents)
 - [ ] __PDF support__ (for importing and working with PDF files)
 - [ ] __AI-powered context__ (providing additional insights for studied materials via built-in neural network)
