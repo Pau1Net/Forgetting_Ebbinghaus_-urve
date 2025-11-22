@@ -55,7 +55,6 @@ Forgetting_Ebbinghaus_Сurve/
 - [ ] __PDF support__ (for importing and working with PDF files)
 - [ ] __AI-powered context__ (providing additional insights for studied materials via built-in neural network)
 - [x] Add standart tests
-- [ ] Add License file (Apache 2.0)
 - [ ] __Multi-language support__ (beyond English)
   - [ ] Russian
   - [ ] French
