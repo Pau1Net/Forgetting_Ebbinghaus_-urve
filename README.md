@@ -71,4 +71,4 @@ Contributions are welcome! Please contact [pavelkotsko@icloud.com](mailto:develo
 
 
 
-<div align="center"> Made with ❤️ by the Paul "PaulNet" </div> 
+<div align="center"> Made with ❤️ by the Paul "EpochSpace" </div> 
